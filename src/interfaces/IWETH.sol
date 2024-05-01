@@ -22,19 +22,13 @@
  */
 pragma solidity ^0.8.0;
 
-import {IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-interface IStandardizedYield is IERC20Metadata {
+interface IWETH is IERC20 {
+    event Deposit(address indexed dst, uint256 wad);
+    event Withdrawal(address indexed src, uint256 wad);
 
-    /// @dev Emitted when any base tokens is deposited to mint shares
-    event Deposit(
-        address indexed caller,
-        address indexed receiver,
-        address indexed tokenIn,
-        uint256 amountDeposited,
-        uint256 amountSyOut
-    );
+    function deposit() external payable;
 
-
+    function withdraw(uint256 wad) external;
 }
-
