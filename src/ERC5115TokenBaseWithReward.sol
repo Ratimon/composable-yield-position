@@ -88,15 +88,10 @@ abstract contract ERC5115TokenBaseWithReward is ERC5115TokenBase, RewardManager 
     }
 
     /*///////////////////////////////////////////////////////////////
-                            TRANSFER HOOKS
+                            BEFORE TRANSFER HOOKS
     //////////////////////////////////////////////////////////////*/
-    
-    // function _beforeTokenTransfer(address from, address to, uint256) internal virtual override whenNotPaused {
-    //     _updateAndDistributeRewardsForTwo(from, to);
-    // }
 
     function _update(address from, address to, uint256 value) internal virtual override whenNotPaused {
-
          _updateAndDistributeRewardsForTwo(from, to);
 
         super._update(from, to, value);
