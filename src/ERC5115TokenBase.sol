@@ -8,18 +8,12 @@ import {ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20P
 
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Pausable } from "@openzeppelin/contracts/utils/Pausable.sol";
-
 import {ReentrancyGuard } from  "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import {TokenHelper } from "@main/libraries/TokenHelper.sol";
 
-import  {TokenHelper } from "@main/libraries/TokenHelper.sol";
+// Errors files
 
-
-// import "../libraries/Errors.sol";
-
-
-// permit ?
-
-abstract contract ERC5115Token is IStandardizedYield,ERC20, ERC20Permit, TokenHelper,  Ownable, Pausable, ReentrancyGuard {
+abstract contract ERC5115TokenBase is IStandardizedYield,ERC20, ERC20Permit, TokenHelper,  Ownable, Pausable, ReentrancyGuard {
 
     address public immutable yieldToken;
 
@@ -34,11 +28,11 @@ abstract contract ERC5115Token is IStandardizedYield,ERC20, ERC20Permit, TokenHe
     constructor(
         string memory _name,
         string memory _symbol,
-        address initialOwner,
+        address _initialOwner,
         address _yieldToken
      )
         ERC20(_name, _symbol) ERC20Permit(_name)
-        Ownable(initialOwner)
+        Ownable(_initialOwner)
     {
         yieldToken = _yieldToken;
     }
