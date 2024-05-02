@@ -4,6 +4,10 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 
 interface IPrincipalToken is IERC20Metadata {
+
+    error OnlyYT();
+    error OnlyYContractFactory();
+
     function burnByYT(address user, uint256 amount) external;
 
     function mintByYT(address user, uint256 amount) external;

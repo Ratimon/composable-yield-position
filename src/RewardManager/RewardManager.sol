@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import {RewardManagerAbstract, PMath, ArrayLib} from "@main/RewardManager/RewardManagerAbstract.sol";
 
-/// NOTE: This RewardManager is used with SY & YTv2 & PendleMarket. For YTv1, it will use RewardManagerAbstract
+/// NOTE: This RewardManager is used with SY & YTv2 & AmmMarket. For YTv1, it will use RewardManagerAbstract
 /// NOTE: RewardManager must not have duplicated rewardTokens
 abstract contract RewardManager is RewardManagerAbstract {
     using PMath for uint256;
