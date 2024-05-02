@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import {RewardManager, PMath, ArrayLib} from "@main/RewardManager/RewardManager.sol";
+import {RewardManager, Math, ArrayLib} from "@main/RewardManager/RewardManager.sol";
 
 import {ERC5115TokenBase} from "@main/ERC5115TokenBase.sol";
 
 /// NOTE: yieldToken MUST NEVER BE a rewardToken, else the rewardManager will behave erroneously
 abstract contract ERC5115TokenBaseWithReward is ERC5115TokenBase, RewardManager {
-    using PMath for uint256;
+    using Math for uint256;
     using ArrayLib for address[];
 
     constructor(

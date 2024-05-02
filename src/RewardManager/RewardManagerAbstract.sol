@@ -5,13 +5,13 @@ import {IRewardManager} from "@main/interfaces/IRewardManager.sol";
 
 import {ArrayLib } from "@main/libraries/ArrayLib.sol";
 import {TokenHelper } from "@main/libraries/TokenHelper.sol";
-import {PMath } from "@main/libraries/math/PMath.sol";
+import {Math } from "@main/libraries/math/Math.sol";
 
 // import "./RewardManagerAbstract.sol";
 
 /// NOTE: RewardManager must not have duplicated rewardTokens
 abstract contract RewardManagerAbstract is IRewardManager, TokenHelper {
-    using PMath for uint256;
+    using Math for uint256;
 
     uint256 internal constant INITIAL_REWARD_INDEX = 1;
 
