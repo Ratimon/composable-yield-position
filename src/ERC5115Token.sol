@@ -158,6 +158,44 @@ abstract contract ERC5115Token is IStandardizedYield,ERC20, ERC20Permit, TokenHe
         indexes = new uint256[](0);
     }
 
+    /*///////////////////////////////////////////////////////////////
+                MISC METADATA FUNCTIONS
+    //////////////////////////////////////////////////////////////*/
+
+    function previewDeposit(
+        address tokenIn,
+        uint256 amountTokenToDeposit
+    ) external view virtual returns (uint256 amountSharesOut) {
+        if (!isValidTokenIn(tokenIn)) revert SYInvalidTokenIn(tokenIn);
+        return _previewDeposit(tokenIn, amountTokenToDeposit);
+    }
+
+    function previewRedeem(
+        address tokenOut,
+        uint256 amountSharesToRedeem
+    ) external view virtual returns (uint256 amountTokenOut) {
+        if (!isValidTokenOut(tokenOut)) revert SYInvalidTokenOut(tokenOut);
+        return _previewRedeem(tokenOut, amountSharesToRedeem);
+    }
+
+    function _update(address from, address to, uint256 value) internal virtual override whenNotPaused {
+        super._update(from, to, value);
+    }
+
+    function _previewDeposit(
+        address tokenIn,
+        uint256 amountTokenToDeposit
+    ) internal view virtual returns (uint256 amountSharesOut);
+
+    function _previewRedeem(
+        address tokenOut,
+        uint256 amountSharesToRedeem
+    ) internal view virtual returns (uint256 amountTokenOut);
+
+    function getTokensIn() public view virtual returns (address[] memory res);
+
+    function getTokensOut() public view virtual returns (address[] memory res);   
+
     function isValidTokenIn(address token) public view virtual returns (bool);
 
     function isValidTokenOut(address token) public view virtual returns (bool);
