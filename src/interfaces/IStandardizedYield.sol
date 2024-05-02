@@ -35,6 +35,15 @@ interface IStandardizedYield is IERC20Metadata {
         uint256 amountSyOut
     );
 
+    /// @dev Emitted when any shares are redeemed for base tokens
+    event Redeem(
+        address indexed caller,
+        address indexed receiver,
+        address indexed tokenOut,
+        uint256 amountSyToRedeem,
+        uint256 amountTokenOut
+    );
+
 
 }
 

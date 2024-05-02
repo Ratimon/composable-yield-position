@@ -72,6 +72,30 @@ abstract contract ERC5115Token is IStandardizedYield,ERC20, ERC20Permit, TokenHe
     }
 
     /**
+     * @dev See {IStandardizedYield-redeem}
+     */
+    function redeem(
+        address receiver,
+        uint256 amountSharesToRedeem,
+        address tokenOut,
+        uint256 minTokenOut,
+        bool burnFromInternalBalance
+    ) external nonReentrant returns (uint256 amountTokenOut) {
+        if (!isValidTokenOut(tokenOut)) revert SYInvalidTokenOut(tokenOut);
+        if (amountSharesToRedeem == 0) revert SYZeroRedeem();
+
+        if (burnFromInternalBalance) {
+            _burn(address(this), amountSharesToRedeem);
+        } else {
+            _burn(msg.sender, amountSharesToRedeem);
+        }
+
+        amountTokenOut = _redeem(receiver, tokenOut, amountSharesToRedeem);
+        if (amountTokenOut < minTokenOut) revert SYInsufficientTokenOut(amountTokenOut, minTokenOut);
+        emit Redeem(msg.sender, receiver, tokenOut, amountSharesToRedeem, amountTokenOut);
+    }
+
+    /**
      * @notice mint shares based on the deposited base tokens
      * @param tokenIn base token address used to mint shares
      * @param amountDeposited amount of base tokens deposited
@@ -79,7 +103,21 @@ abstract contract ERC5115Token is IStandardizedYield,ERC20, ERC20Permit, TokenHe
      */
     function _deposit(address tokenIn, uint256 amountDeposited) internal virtual returns (uint256 amountSharesOut);
 
+    /**
+     * @notice redeems base tokens based on amount of shares to be burned
+     * @param tokenOut address of the base token to be redeemed
+     * @param amountSharesToRedeem amount of shares to be burned
+     * @return amountTokenOut amount of base tokens redeemed
+     */
+    function _redeem(
+        address receiver,
+        address tokenOut,
+        uint256 amountSharesToRedeem
+    ) internal virtual returns (uint256 amountTokenOut);
+
     function isValidTokenIn(address token) public view virtual returns (bool);
+
+    function isValidTokenOut(address token) public view virtual returns (bool);
 
 
 }
