@@ -3,10 +3,8 @@ pragma solidity ^0.8.0;
 
 import {IRewardManager} from "@main/interfaces/IRewardManager.sol";
 
-import  {ArrayLib } from "@main/libraries/ArrayLib.sol";
-
+import {ArrayLib } from "@main/libraries/ArrayLib.sol";
 import {TokenHelper } from "@main/libraries/TokenHelper.sol";
-
 import {PMath } from "@main/libraries/math/PMath.sol";
 
 // import "./RewardManagerAbstract.sol";
