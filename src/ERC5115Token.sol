@@ -115,6 +115,49 @@ abstract contract ERC5115Token is IStandardizedYield,ERC20, ERC20Permit, TokenHe
         uint256 amountSharesToRedeem
     ) internal virtual returns (uint256 amountTokenOut);
 
+    /*///////////////////////////////////////////////////////////////
+                               EXCHANGE-RATE
+    //////////////////////////////////////////////////////////////*/
+
+    /**
+     * @dev See {IStandardizedYield-exchangeRate}
+     */
+    function exchangeRate() external view virtual override returns (uint256 res);
+
+
+    /*///////////////////////////////////////////////////////////////
+                               REWARDS-RELATED
+    //////////////////////////////////////////////////////////////*/
+
+    /**
+     * @dev See {IStandardizedYield-claimRewards}
+     */
+    function claimRewards(address /*user*/) external virtual override returns (uint256[] memory rewardAmounts) {
+        rewardAmounts = new uint256[](0);
+    }
+
+    /**
+     * @dev See {IStandardizedYield-getRewardTokens}
+     */
+    function getRewardTokens() external view virtual override returns (address[] memory rewardTokens) {
+        rewardTokens = new address[](0);
+    }
+
+    /**
+     * @dev See {IStandardizedYield-accruedRewards}
+     */
+    function accruedRewards(address /*user*/) external view virtual override returns (uint256[] memory rewardAmounts) {
+        rewardAmounts = new uint256[](0);
+    }
+
+    function rewardIndexesCurrent() external virtual override returns (uint256[] memory indexes) {
+        indexes = new uint256[](0);
+    }
+
+    function rewardIndexesStored() external view virtual override returns (uint256[] memory indexes) {
+        indexes = new uint256[](0);
+    }
+
     function isValidTokenIn(address token) public view virtual returns (bool);
 
     function isValidTokenOut(address token) public view virtual returns (bool);
