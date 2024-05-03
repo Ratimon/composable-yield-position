@@ -5,6 +5,15 @@ import {IRewardManager} from "@main/interfaces/IRewardManager.sol";
 import {IInterestManagerYT} from "./IInterestManagerYT.sol";
 
 interface IYieldToken is IERC20Metadata, IRewardManager, IInterestManagerYT {
+
+    // YIELD CONTRACT
+    error YTExpired();
+    error YTNotExpired();
+    error YieldContractInsufficientSy(uint256 actualSy, uint256 requiredSy);
+    error YTNothingToRedeem();
+    error YTPostExpiryDataNotSet();
+    error YTNoFloatingSy();
+    
     event Mint(
         address indexed caller,
         address indexed receiverPT,
