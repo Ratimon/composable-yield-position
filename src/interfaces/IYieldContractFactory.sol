@@ -24,6 +24,14 @@
 pragma solidity ^0.8.0;
 
 interface IYieldContractFactory {
+
+    error YCFactoryInvalidExpiry();
+    error YCFactoryYieldContractExisted();
+    error YCFactoryZeroExpiryDivisor();
+    error YCFactoryZeroTreasury();
+    error YCFactoryInterestFeeRateTooHigh(uint256 interestFeeRate, uint256 maxInterestFeeRate);
+    error YCFactoryRewardFeeRateTooHigh(uint256 newRewardFeeRate, uint256 maxRewardFeeRate);
+
     event CreateYieldContract(address indexed SY, uint256 indexed expiry, address PT, address YT);
 
     event SetExpiryDivisor(uint256 newExpiryDivisor);

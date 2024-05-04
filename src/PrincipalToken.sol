@@ -9,7 +9,7 @@ import {ExpiryHelpers} from "@main/libraries/ExpiryHelpers.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {Initializable} from "@openzeppelin-upgradable/contracts/proxy/utils/Initializable.sol";
 
-contract PrincipalTokenV2 is ERC20, Initializable, IPrincipalToken {
+contract PrincipalToken is ERC20, Initializable, IPrincipalToken {
     address public immutable SY;
     address public immutable factory;
     uint256 public immutable expiry;
