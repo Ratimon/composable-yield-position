@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 pragma solidity ^0.8.17;
 
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import {IERC20, SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import {IStandardizedYield} from "@main/interfaces/IStandardizedYield.sol";
 import {IYieldToken} from "@main/interfaces/IYieldToken.sol";
@@ -269,7 +269,9 @@ contract YieldToken is IYieldToken, ERC20, ReentrancyGuard, RewardManager, Inter
         uint256[] memory amountPYToRedeems
     ) internal returns (uint256[] memory amountSyOuts) {
         uint256 totalAmountPYToRedeem = amountPYToRedeems.sum();
+        // burn PT
         IPrincipalToken(PT).burnByYT(address(this), totalAmountPYToRedeem);
+        // burn YT
         if (!isExpired()) _burn(address(this), totalAmountPYToRedeem);
 
         uint256 index = _pyIndexCurrent();

@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 import {IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import {IRewardManager} from "@main/interfaces/IRewardManager.sol";
-import {IInterestManagerYT} from "./IInterestManagerYT.sol";
+import {IInterestManagerYT} from "@main/interfaces/IInterestManagerYT.sol";
 
 interface IYieldToken is IERC20Metadata, IRewardManager, IInterestManagerYT {
 
