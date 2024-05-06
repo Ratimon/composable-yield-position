@@ -17,14 +17,14 @@ import {ExpiryHelpers} from "@main/libraries/ExpiryHelpers.sol";
 import {RewardManager} from "@main/RewardManager/RewardManager.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {ReentrancyGuard } from  "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import {InterestManagerYT} from "@main/InterestManagerYT.sol";
+import {InterestManager} from "@main/InterestManager.sol";
 
 /**
 Invariance to maintain:
 - address(0) & address(this) should never have any rewards & activeBalance accounting done. This is
     guaranteed by address(0) & address(this) check in each updateForTwo function
 */
-contract YieldToken is IYieldToken, ERC20, ReentrancyGuard, RewardManager, InterestManagerYT {
+contract YieldToken is IYieldToken, ERC20, ReentrancyGuard, RewardManager, InterestManager {
     using Math for uint256;
     using SafeERC20 for IERC20;
     using ArrayLib for uint256[];

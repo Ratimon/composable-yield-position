@@ -6,7 +6,7 @@ import {IPrincipalToken} from "@main/interfaces/IPrincipalToken.sol";
 import {IInterestManagerYT} from "@main/interfaces/IInterestManagerYT.sol";
 import {IYieldContractFactory} from "@main/interfaces/IYieldContractFactory.sol";
 
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import {Math } from "@main/libraries/math/Math.sol";
 import {TokenHelper } from "@main/libraries/TokenHelper.sol";
@@ -20,7 +20,7 @@ It has been proven and tested that totalSyRedeemable will not change over time, 
 
 Due to this, it is required to update users' accruedReward STRICTLY BEFORE redeeming their interest.
 */
-abstract contract InterestManagerYT is TokenHelper, IInterestManagerYT {
+abstract contract InterestManager is TokenHelper, IInterestManagerYT {
     using Math for uint256;
 
     struct UserInterest {
