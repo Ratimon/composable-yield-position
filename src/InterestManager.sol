@@ -4,7 +4,7 @@ pragma solidity ^0.8.17;
 import {IYieldToken} from "@main/interfaces/IYieldToken.sol";
 import {IPrincipalToken} from "@main/interfaces/IPrincipalToken.sol";
 import {IInterestManagerYT} from "@main/interfaces/IInterestManagerYT.sol";
-import {IYieldContractFactory} from "@main/interfaces/IYieldContractFactory.sol";
+// import {IYieldContractFactory} from "@main/interfaces/IYieldContractFactory.sol";
 
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 

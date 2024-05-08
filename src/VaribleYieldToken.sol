@@ -23,7 +23,7 @@ Invariance to maintain:
 - address(0) & address(this) should never have any rewards & activeBalance accounting done. This is
     guaranteed by address(0) & address(this) check in each updateForTwo function
 */
-contract VaribleYieldToken is IVaribleYieldToken, ReentrancyGuard {
+contract VaribleYieldToken is IVaribleYieldToken, ERC20, ReentrancyGuard {
 
 // contract VaribleYieldToken is IVaribleYieldToken, ERC20, ReentrancyGuard, RewardManager, InterestManagerYT {
     using Math for uint256;
@@ -34,52 +34,51 @@ contract VaribleYieldToken is IVaribleYieldToken, ReentrancyGuard {
     //     uint256 firstPYIndex;
     // }
 
-    // address public immutable SY;
-    // address public immutable PT;
+    address public immutable SY;
+    address public immutable GT;
     // address public immutable factory;
     // uint256 public immutable expiry;
 
-    // bool public immutable doCacheIndexSameBlock;
+    bool public immutable doCacheIndexSameBlock;
 
-    // uint256 public syReserve;
+    uint256 public syReserve;
 
-    // uint128 public pyIndexLastUpdatedBlock;
-    // uint128 internal _pyIndexStored;
+    uint128 public pyIndexLastUpdatedBlock;
+    uint128 internal _pyIndexStored;
 
     // PostExpiryData public postExpiry;
 
-    // uint256 internal _lastCollectedInterestIndex;
+    uint256 internal _lastCollectedInterestIndex;
 
-    // modifier updateData() {
-    //     if (isExpired()) _setPostExpiryData();
-    //     _;
-    //     _updateSyReserve();
-    // }
+    modifier updateData() {
+        // if (isExpired()) _setPostExpiryData();
+        _;
+        // _updateSyReserve();
+    }
 
     // modifier notExpired() {
     //     if (isExpired()) revert YTExpired();
     //     _;
     // }
 
-    // /**
-    //  * @param _doCacheIndexSameBlock if true, the PY index is cached for each block, and thus is
-    //  * constant for all txs within the same block. Otherwise, the PY index is recalculated for
-    //  * every tx.
-    //  */
-    // constructor(
-    //     address _SY,
-    //     address _PT,
-    //     string memory _name,
-    //     string memory _symbol,
-    //     uint256 _expiry,
-    //     bool _doCacheIndexSameBlock
-    // ) ERC20(_name, _symbol) {
-    //     SY = _SY;
-    //     PT = _PT;
-    //     expiry = _expiry;
-    //     factory = msg.sender;
-    //     doCacheIndexSameBlock = _doCacheIndexSameBlock;
-    // }
+    /**
+     * @param _doCacheIndexSameBlock if true, the PY index is cached for each block, and thus is
+     * constant for all txs within the same block. Otherwise, the PY index is recalculated for
+     * every tx.
+     */
+    constructor(
+        address _SY,
+        address _GT,
+        string memory _name,
+        string memory _symbol,
+        bool _doCacheIndexSameBlock
+    ) ERC20(_name, _symbol) {
+        SY = _SY;
+        GT = _GT;
+        // expiry = _expiry;
+        // factory = msg.sender;
+        doCacheIndexSameBlock = _doCacheIndexSameBlock;
+    }
 
     // /**
     //  * @notice Tokenize SY into PT + YT of equal qty. Every unit of asset of SY will create 1 PT + 1 YT

@@ -5,7 +5,7 @@ import {IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/extensions/IER
 
 interface IGuaranteedYieldToken is IERC20Metadata {
 
-    error OnlyGT();
+    error OnlyVT();
     // error OnlyContractFactory();
 
     function burnByVT(address user, uint256 amount) external;
